@@ -28,9 +28,9 @@ This modular design reflects a simplified MIPS CPU architecture that can be synt
 
 The software side was developed in **MIPS assembly language**:
 
-- **mul.asm** — Implements arithmetic and branching logic, compiled into machine code for the instruction memory:contentReference[oaicite:0]{index=0}  
-- **insmem_h.txt** — Instruction memory initialization file:contentReference[oaicite:1]{index=1}  
-- **datamem_h.txt** — Data memory initialization file:contentReference[oaicite:2]{index=2}  
+- **mul.asm** — Implements arithmetic and branching logic, compiled into machine code for the instruction memory:contentReference
+- **insmem_h.txt** — Instruction memory initialization file:contentReference
+- **datamem_h.txt** — Data memory initialization file:contentReference
 
 The program demonstrates:
 - Reading values from memory  
@@ -48,23 +48,6 @@ The program demonstrates:
 4. Results are written back to registers, data memory, or to I/O devices (such as LEDs).  
 
 This demonstrates how **hardware architecture and software control flow are co-designed** to achieve functional execution on a custom processor.
-
----
-
-## ⚙️ Requirements
-
-- **HDL Tools**: Xilinx Vivado / ModelSim / Icarus Verilog  
-- **Assembler/Compiler**: MARS or SPIM for generating MIPS machine code  
-- **FPGA Board** (optional for synthesis): Xilinx Basys 3 / Zybo / ZedBoard  
-
----
-
-## 🚀 How to Run
-
-1. Load Verilog source files into your HDL tool.  
-2. Preload `insmem_h.txt` and `datamem_h.txt` into instruction and data memory modules.  
-3. Run simulation (`top.v` as top-level).  
-4. Observe register values and LED output (`0x7FF0`) to verify program execution.  
 
 ---
 
