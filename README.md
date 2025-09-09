@@ -10,15 +10,18 @@ The hardware implements essential CPU components, while the software runs on top
 
 The hardware was implemented in Verilog and includes the following modules:
 
+### Given files
 - **ALU.v** — Arithmetic Logic Unit  
 - **RegisterFile.v** — General-purpose register storage  
 - **ControlUnit.v** — Decodes instructions and generates control signals  
 - **InstructionMemory.v** — Stores instructions (preloaded from `.txt` files)  
 - **DataMemory.v** — Provides read/write access to memory  
 - **reg_half.v** — Half-register utility  
-- **clockdiv.v** — Clock divider for simulation/FPGA adaptation  
-- **top.v** — Top-level module integrating all components  
 - **MIPS.v** — Main processor datapath  
+
+### What I implemented
+- **top.v** — Top-level module integrating all components  
+- **clockdiv.v** — Clock divider for simulation/FPGA adaptation
 
 This modular design reflects a simplified MIPS CPU architecture that can be synthesized and tested on FPGA platforms.
 
@@ -28,6 +31,7 @@ This modular design reflects a simplified MIPS CPU architecture that can be synt
 
 The software side was developed in **MIPS assembly language**:
 
+### What I implemented
 - **mul.asm** — Implements arithmetic and branching logic, compiled into machine code for the instruction memory:contentReference
 - **insmem_h.txt** — Instruction memory initialization file:contentReference
 - **datamem_h.txt** — Data memory initialization file:contentReference
