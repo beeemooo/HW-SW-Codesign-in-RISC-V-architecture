@@ -10,67 +10,20 @@
 #addi $s7 $0, 0x00000066
 #sw $s7 0x00007ff4($0)
 
-
 loop:   
-    and $t0, $0, $0
-    and $t1, $0, $0
-    and $t2, $0, $0
-    and $t3, $0, $0
-    and $t4, $0, $0
-    and $t5, $0, $0
-    and $t6, $0, $0
-    and $t7, $0, $0
-    
-    and $s0, $0, $0
-    and $s1, $0, $0
-    and $s2, $0, $0
-    and $s3, $0, $0
-    
-    lw $s0, 0x7ff4($0)       # Load 8-bit value into $s6
-    
-    addi $t0, $0, 0x0f
-    and $s1, $s0, $t0
-    
-    addi $t1, $0, 0x10
-    and $t2, $s0, $t1
-    beq $t2, $0, second
-    
-    add $t3, $s1, $0
+    lw $s6, 0x7ff4($0)       # Load 8-bit value into $s6
+    andi $t1, $s6, 0x0f      # Extract lower 4 bits (num2) -> $t1
+    srl $t2, $s6, 4          # Extract upper 4 bits (num1) -> $t2
 
-second:
-    addi $t4, $0, 0x20
-    and $t5, $s0, $t4
-    beq $t5, $0, third
-    
-    add $t3, $t3, $s1
-    add $t3, $t3, $s1
-    
-third:
-    addi $t6, $0, 0x40
-    and $t7, $s0, $t6
-    beq $t7, $0, fourth
-    
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
+    addi $s0, $0, 0          # Initialize result ($s0 = 0)
+    addi $t3, $0, 0          # Initialize loop counter ($t3 = 0)
 
-fourth:
-    add $t1, $0, $0
-    add $t2, $0, $0
-    addi $t1, $0, 0x80
-    and $t2, $s0, $t1
-    beq $t2, $0, last
-    
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    add $t3, $s1, $t3
-    
-last:
-   sw $t3, 0x7ff0($0)
-   j loop
+multiply:
+    beq $t3, $t1, end        # If $t3 == $t1, exit loop
+    add $s0, $s0, $t2        # $s0 += $t2
+    addi $t3, $t3, 1         # Increment loop counter ($t3++)
+    j multiply               # Jump back to multiply
+
+end:
+    sw $s0, 0x7ff0($0)       # Store result at 0x7FF0
+    j loop                   # Repeat loop
